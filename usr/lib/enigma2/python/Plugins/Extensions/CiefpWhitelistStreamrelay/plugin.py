@@ -9,8 +9,8 @@ from Screens.Screen import Screen
 
 # Naziv i opis plugina
 PLUGIN_NAME = "CiefpWhitelistStreamrelay"
-PLUGIN_DESC = "Kreira whitelist_streamrelay fajl iz userbouquet podataka"
-PLUGIN_VERSION = "1.1"
+PLUGIN_DESC = "Creates a whitelist_streamrelay file from userbouquet data"
+PLUGIN_VERSION = "1.2"
 
 # Putanje
 WHITE_LIST_FILE = 'whitelist_streamrelay'
@@ -75,9 +75,9 @@ def create_whitelist_file():
     
 class WhitelistScreen(Screen):
     skin = """
-    <screen name="WhitelistScreen" position="center,center" size="900,540" title="Ciefp Whitelist Streamrelay">
-        <widget name="logo" position="10,10" size="900,400" transparent="1" alphatest="on" />
-        <widget name="status" position="10,460" size="880,60" font="Regular;26" halign="center" valign="center" />
+    <screen name="WhitelistScreen" position="center,center" size="1024,940" title="..:: Ciefp Whitelist Streamrelay ::..">
+        <widget name="logo" position="10,10" size="1024,800" transparent="1" alphatest="on" />
+        <widget name="status" position="10,860" size="1000,60" font="Regular;26" halign="center" valign="center" />
     </screen>
     """
 
