@@ -10,7 +10,7 @@ from Screens.Screen import Screen
 # Naziv i opis plugina
 PLUGIN_NAME = "CiefpWhitelistStreamrelay"
 PLUGIN_DESC = "Creates a whitelist_streamrelay file from userbouquet data"
-PLUGIN_VERSION = "1.2"
+PLUGIN_VERSION = "1.3"
 
 # Putanje
 WHITE_LIST_FILE = 'whitelist_streamrelay'
@@ -29,14 +29,28 @@ USER_BOUQUETS = [
     'userbouquet.ciefp_28e_skyukkids.tv',
 ]
 
-# Funkcija za obradu linija iz userbouquet
+# Lista ignorisanih servisnih referenci
+IGNORE_REFERENCES = [
+    '1:0:19:1332:3EF:1:C00000:0:0:0:',
+    '1:0:19:132F:3EF:1:C00000:0:0:0:',
+    '1:0:19:1330:3EF:1:C00000:0:0:0:',
+    '1:0:19:152D:455:1:C00000:0:0:0:',
+    '1:0:19:283D:3FB:1:C00000:0:0:0:',
+    '1:0:19:2B66:3F3:1:C00000:0:0:0:',
+    '1:0:19:33AC:3EB:1:C00000:0:0:0:',
+    '1:0:19:7D:B:85:C00000:0:0:0:',
+    '1:0:19:6FEE:436:1:C00000:0:0:0:',
+    '1:0:19:6FEF:436:1:C00000:0:0:0:',
+]
 
+# Funkcija za obradu linija iz userbouquet
 def process_bouquet_line(line):
     """ Obradjuje liniju - uklanja #SERVICE i proverava validnost """
     if line.startswith('#SERVICE 1:0:19:'):
-        return line.replace('#SERVICE ', '').strip()
+        service_ref = line.replace('#SERVICE ', '').strip()
+        if service_ref not in IGNORE_REFERENCES:
+            return service_ref
     return None
-
 
 def filter_valid_lines(file_path):
     """ Filtrira validne linije iz userbouquet fajla """
@@ -52,7 +66,6 @@ def filter_valid_lines(file_path):
                 valid_lines.append(processed_line)
     return valid_lines
 
-
 def process_bouquets():
     """ Prikuplja linije iz svih userbouquet fajlova """
     final_lines = []
@@ -63,7 +76,6 @@ def process_bouquets():
             final_lines.extend(valid_lines)
     return final_lines
 
-
 def create_whitelist_file():
     """ Kreira whitelist fajl sa filtriranim linijama """
     processed_lines = process_bouquets()
@@ -72,12 +84,12 @@ def create_whitelist_file():
             for line in processed_lines:
                 f.write(f"{line}\n")
     return len(processed_lines)
-    
+
 class WhitelistScreen(Screen):
     skin = """
-    <screen name="WhitelistScreen" position="center,center" size="1024,940" title="..:: Ciefp Whitelist Streamrelay ::..">
-        <widget name="logo" position="10,10" size="1024,800" transparent="1" alphatest="on" />
-        <widget name="status" position="10,860" size="1000,60" font="Regular;26" halign="center" valign="center" />
+    <screen name="WhitelistScreen" position="center,center" size="800,880" title="..:: Ciefp Whitelist Streamrelay ::..">
+        <widget name="logo" position="10,10" size="800,800" transparent="1" alphatest="on" />
+        <widget name="status" position="10,820" size="800,60" font="Regular;26" halign="center" valign="center" />
     </screen>
     """
 
@@ -131,7 +143,6 @@ class WhitelistScreen(Screen):
 def run_plugin(session, **kwargs):
     """ Pokretanje glavnog ekrana """
     session.open(WhitelistScreen)
-
 
 def Plugins(**kwargs):
     return [
