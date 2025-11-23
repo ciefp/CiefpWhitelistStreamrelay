@@ -1,7 +1,7 @@
 
 # CiefpWhitelistStreamrelay
 
-![Bouquet](https://github.com/ciefp/CiefpSatelliteAnalyzer/blob/main/whiteliststreamrelay.jpg)
+![Bouquet](https://github.com/ciefp/CiefpWhitelistStreamrelay/blob/main/whiteliststreamrelay.jpg)
 
 ## CiefpWhitelistStreamrelay is a plugin for Enigma2 receivers, designed for automated generation of
 ## `whitelist_streamrelay` file using data from predefined userbouquet files.
