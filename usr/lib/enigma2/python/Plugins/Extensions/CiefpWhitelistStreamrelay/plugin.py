@@ -10,7 +10,7 @@ from Screens.Screen import Screen
 # Naziv i opis plugina
 PLUGIN_NAME = "CiefpWhitelistStreamrelay"
 PLUGIN_DESC = "Creates a whitelist_streamrelay file from userbouquet data"
-PLUGIN_VERSION = "1.3"
+PLUGIN_VERSION = "1.4"
 
 # Putanje
 WHITE_LIST_FILE = 'whitelist_streamrelay'
